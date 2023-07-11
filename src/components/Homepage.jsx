@@ -10,6 +10,8 @@ function Homepage() {
   const { data, isFetching } = useGetCryptosQuery();
   console.log(data);
 
+  if (isFetching) return "Loading";
+
   return (
     <>
       <Title level={2} className="heading">
