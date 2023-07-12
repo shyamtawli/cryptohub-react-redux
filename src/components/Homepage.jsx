@@ -3,14 +3,15 @@ import millify from "millify";
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoAPI";
+import { News, Cryptocurrencies } from "../components";
 
 const { Title } = Typography;
 
 function Homepage() {
   const { data, isFetching } = useGetCryptosQuery();
 
-  const gloablStats = data.data.stats;
-  console.log(data);
+  const gloablStats = data?.data?.stats;
+  // console.log(data);
 
   if (isFetching) return "Loading";
 
@@ -48,6 +49,25 @@ function Homepage() {
           />
         </Col>
       </Row>
+      <div className="home-heading-container">
+        <Title level={2} className="home-title">
+          Top 10 Cryptpcurrencies in the world
+        </Title>
+        <Title level={3} className="show-more">
+          <Link to="/cryptocurrencies">Show More</Link>
+        </Title>
+      </div>
+      <Cryptocurrencies simplified />
+
+      <div className="home-heading-container">
+        <Title level={2} className="home-title">
+          Latest Cryto News
+        </Title>
+        <Title level={3} className="show-more">
+          <Link to="/news">Show More</Link>
+        </Title>
+      </div>
+      <News simplified />
     </>
   );
 }
