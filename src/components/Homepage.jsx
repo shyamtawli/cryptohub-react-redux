@@ -8,6 +8,8 @@ const { Title } = Typography;
 
 function Homepage() {
   const { data, isFetching } = useGetCryptosQuery();
+
+  const gloablStats = data.data.stats;
   console.log(data);
 
   if (isFetching) return "Loading";
@@ -19,19 +21,31 @@ function Homepage() {
       </Title>
       <Row>
         <Col span={12}>
-          <Statistic title="Total Cryptocurrencies" value="5" />
+          <Statistic title="Total Cryptocurrencies" value={gloablStats.total} />
         </Col>
         <Col span={12}>
-          <Statistic title="Total Exchanges" value="5" />
+          <Statistic
+            title="Total Exchanges"
+            value={millify(gloablStats.totalExchanges)}
+          />
         </Col>
         <Col span={12}>
-          <Statistic title="Total Market Cap" value="5" />
+          <Statistic
+            title="Total Market Cap"
+            value={millify(gloablStats.totalMarketCap)}
+          />
         </Col>
         <Col span={12}>
-          <Statistic title="Total 24h Volume" value="5" />
+          <Statistic
+            title="Total 24h Volume"
+            value={millify(gloablStats.total24hVolume)}
+          />
         </Col>
         <Col span={12}>
-          <Statistic title="Total Markets" value="5" />
+          <Statistic
+            title="Total Markets"
+            value={millify(gloablStats.totalMarkets)}
+          />
         </Col>
       </Row>
     </>
