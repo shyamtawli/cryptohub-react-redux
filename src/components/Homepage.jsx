@@ -8,7 +8,7 @@ import { News, Cryptocurrencies } from "../components";
 const { Title } = Typography;
 
 function Homepage() {
-  const { data, isFetching } = useGetCryptosQuery();
+  const { data, isFetching } = useGetCryptosQuery(10);
 
   const gloablStats = data?.data?.stats;
   // console.log(data);
