@@ -300,7 +300,7 @@ a:hover {
   width: 70%;
 }
 
-.news-image-container .img {
+.news-image-container img {
   width: 100px;
   height: 100px;
 }
@@ -311,6 +311,7 @@ a:hover {
 .provider-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .provider-name {
   margin-left: 10px;
