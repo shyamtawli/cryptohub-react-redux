@@ -204,6 +204,7 @@ a:hover {
 
 .coin-desc-link {
   display: flex;
+  flex-direction: column;
   gap: 40px;
   margin-top: 40px;
   padding-top: 20px;
@@ -228,12 +229,9 @@ a:hover {
 }
 
 .coin-desc {
-  flex: 0.5;
-}
-
-.coin-links {
-  padding: 0px 20px;
-  flex: 0.5;
+  width: 50%;
+  /* flex: 0.5;
+  flex-direction: column; */
 }
 
 .coin-link {
