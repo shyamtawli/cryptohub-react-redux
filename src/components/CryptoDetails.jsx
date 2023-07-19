@@ -14,7 +14,11 @@ import {
   NumberOutlined,
   ThunderboltOutlined,
 } from "@ant-design/icons";
-import { useGetCryptoDetailsQuery } from "../services/cryptoAPI";
+import {
+  useGetCryptoDetailsQuery,
+  useGetCryptoHistoryQuery,
+} from "../services/cryptoAPI";
+import LineChart from "./LineChart";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -23,8 +27,12 @@ function CryptoDetails() {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+  const { data: coinHistory } = useGetCryptoHistoryQuery({
+    coinId,
+    timePeriod,
+  });
   const cryptoDetails = data?.data?.coin;
-  console.log(cryptoDetails);
+  console.log(coinHistory);
 
   if (isFetching) return "Loading";
 
@@ -37,13 +45,13 @@ function CryptoDetails() {
       icon: <DollarCircleOutlined />,
     },
     { title: "Rank", value: cryptoDetails?.rank, icon: <NumberOutlined /> },
-    // {
-    //   title: "24h Volume",
-    //   value: `$ ${
-    //     cryptoDetails["24hVolume"] && millify(cryptoDetails["24hVolume"])
-    //   }`,
-    //   icon: <ThunderboltOutlined />,
-    // },
+    {
+      title: "24h Volume",
+      value: `$ ${
+        cryptoDetails["24hVolume"] && millify(cryptoDetails["24hVolume"])
+      }`,
+      icon: <ThunderboltOutlined />,
+    },
     {
       title: "Market Cap",
       value: `$ ${
@@ -119,6 +127,15 @@ function CryptoDetails() {
           <Option key={date}>{date}</Option>
         ))}
       </Select>
+
+      {/* Chart */}
+      <LineChart
+        coinHistory={coinHistory}
+        currentPrice={millify(cryptoDetails.price)}
+        coinName={cryptoDetails.name}
+      />
+
+      {/* Coin Statistics */}
       <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
@@ -137,6 +154,8 @@ function CryptoDetails() {
             </Col>
           ))}
         </Col>
+
+        {/* Other Statistics */}
         <Col className="other-stats-info">
           <Col className="coin-value-statistics-heading">
             <Title level={3} className="coin-detailes-heading">
