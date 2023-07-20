@@ -37,7 +37,7 @@ function App() {
             level={5}
             style={{ color: "white", textAlign: "center" }}
           >
-            CryptoVerse <br />
+            CryptoHub <br />
             All rights reserved
           </Typography.Title>
           <Space>
