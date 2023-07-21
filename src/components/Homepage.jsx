@@ -4,6 +4,7 @@ import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoAPI";
 import { News, Cryptocurrencies } from "../components";
+import Loader from "./Loader";
 
 const { Title } = Typography;
 
@@ -13,7 +14,7 @@ function Homepage() {
   const gloablStats = data?.data?.stats;
   // console.log(data);
 
-  if (isFetching) return "Loading";
+  if (isFetching) return <Loader />;
 
   return (
     <>
