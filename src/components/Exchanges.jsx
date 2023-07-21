@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import millify from "millify";
-// import { Col, Row, Typography, Avatar } from "antd";
+import Loader from "./Loader";
 import { Table } from "antd";
-
-// const { Text } = Typography;
 
 function Exchanges() {
   const [exchanges, setExchanges] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("https://api.coingecko.com/api/v3/exchanges")
+      .then((res) => {
+        setExchanges(res.data);
+        setLoading(false);
+        // console.log(res.data);
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+  }, []);
+
+  if (loading) return <Loader />;
 
   const columns = [
     {
@@ -59,18 +73,6 @@ function Exchanges() {
   });
 
   console.log(data);
-
-  useEffect(() => {
-    axios
-      .get("https://api.coingecko.com/api/v3/exchanges")
-      .then((res) => {
-        setExchanges(res.data);
-        // console.log(res.data);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  }, []);
 
   return (
     <>
